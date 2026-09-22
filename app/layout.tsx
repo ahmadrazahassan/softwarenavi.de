@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { Inter } from "next/font/google";
 import { Toaster } from "sonner";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/public/Theme";
 import { ConsentProvider } from "@/components/public/Consent";
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Toaster position="top-right" richColors closeButton />
           </ConsentProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
