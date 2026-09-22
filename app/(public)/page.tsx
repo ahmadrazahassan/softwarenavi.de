@@ -20,6 +20,7 @@ import { SoftwareSpotlight } from "@/components/home/SoftwareSpotlight";
 import { LandscapeHero } from "@/components/home/LandscapeHero";
 import { ComparisonShowcase } from "@/components/home/ComparisonShowcase";
 import { ReviewMarquee } from "@/components/home/ReviewMarquee";
+import { NewsletterSection } from "@/components/home/NewsletterSection";
 import { RatingsPanel } from "@/components/home/FinanceVisuals";
 import { VendorMarquee } from "@/components/home/VendorMarquee";
 import { CategoryRail } from "@/components/home/CategoryRail";
@@ -346,6 +347,9 @@ export default async function HomePage() {
           </div>
         </section>
       )}
+
+      {/* ───────────── Newsletter ───────────── */}
+      <NewsletterSection />
 
       {/* ───────────── FAQ ───────────── */}
       <section aria-labelledby="faq-title" className="container-site mt-28">
