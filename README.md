@@ -23,9 +23,9 @@ npm run build    # production build (116 prerendered pages)
 
 No environment variables are required for the frontend; see `.env.example` for the backend phase.
 
-**Seed reviews (testing / team previews):** `SEED_REVIEWS=true` fills every product with 100–200 generated German
-reviews (`lib/data/seedReviews.ts`, deterministic per slug) and recomputes all ratings from them. It is ignored when
-`VERCEL_ENV=production`, sets `noindex` + `Disallow: /` while on, and is never written to Supabase.
+**Seed reviews:** `SEED_REVIEWS=true` fills every product with 100–200 generated German reviews
+(`lib/data/seedReviews.ts`, deterministic per slug) and recomputes all ratings from them, including on Vercel
+Production. They are never written to Supabase.
 
 ## Structure
 

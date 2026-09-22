@@ -6,7 +6,6 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/public/Theme";
 import { ConsentProvider } from "@/components/public/Consent";
 import { SITE_NAME, siteUrl } from "@/lib/site";
-import { seedReviewsEnabled } from "@/lib/seedMode";
 
 // Self-hosted by next/font — no request to a font CDN at runtime (DSGVO).
 // General Sans (ITF Free Font License, see app/fonts/GeneralSans-LICENSE.txt) covers ä ö ü ß „ “ €.
@@ -38,8 +37,6 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
   alternates: { canonical: "/" },
   formatDetection: { telephone: false },
-  // seed reviews are test data: keep such builds out of every index
-  ...(seedReviewsEnabled() ? { robots: { index: false, follow: false } } : {}),
 };
 
 export const viewport: Viewport = {
