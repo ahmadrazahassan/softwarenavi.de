@@ -3,6 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import { Cookie } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/form-controls";
@@ -83,6 +84,9 @@ export function ConsentProvider({ children, analyticsDomain }: { children: React
         body: JSON.stringify({ consent_id: next.id, categories: next.c, action, policy_version: next.v }),
         keepalive: true,
       }).catch(() => {});
+      // A previously loaded analytics script can survive React unmounting. Reload
+      // after withdrawal so no further page views are recorded in this tab.
+      if (stored?.c.statistik && !c.statistik) window.location.reload();
     },
     [stored],
   );
@@ -100,7 +104,17 @@ export function ConsentProvider({ children, analyticsDomain }: { children: React
     <ConsentContext.Provider value={value}>
       {children}
 
-      {/* Statistik — self-hosted, cookieless Plausible. Loaded ONLY after explicit consent. */}
+      {/* Statistics scripts mount only after explicit consent. Strip URL parameters before sending. */}
+      {stored?.c.statistik && (
+        <Analytics beforeSend={(event) => {
+          const url = new URL(event.url, window.location.origin);
+          url.search = "";
+          url.hash = "";
+          return { ...event, url: url.toString() };
+        }} />
+      )}
+
+      {/* Optional self-hosted Plausible installation, subject to the same consent. */}
       {stored?.c.statistik && analyticsDomain && (
         <Script
           defer
@@ -122,7 +136,7 @@ export function ConsentProvider({ children, analyticsDomain }: { children: React
               <h2 className="font-heading text-base font-semibold">Ihre Privatsphäre-Einstellungen</h2>
               <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
                 Wir verwenden technisch notwendige Speicherungen, damit die Website funktioniert. Mit Ihrer Einwilligung nutzen wir zusätzlich eine
-                cookielose, selbst gehostete Reichweitenmessung und laden externe Medien. Sie können Ihre Auswahl jederzeit über „Cookie-Einstellungen“ im
+                cookielose Reichweitenmessung mit Vercel Web Analytics und laden externe Medien. Sie können Ihre Auswahl jederzeit über „Cookie-Einstellungen“ im
                 Fußbereich ändern. Mehr in der{" "}
                 <Link href="/cookie-richtlinie" className="font-medium text-ink underline decoration-brand underline-offset-2">
                   Cookie-Richtlinie
@@ -166,8 +180,8 @@ export function ConsentProvider({ children, analyticsDomain }: { children: React
               title="Statistik"
               checked={draft.statistik}
               onChange={(v) => setDraft((d) => ({ ...d, statistik: v }))}
-              description="Cookielose, selbst gehostete Reichweitenmessung mit IP-Anonymisierung. Keine Weitergabe an Dritte."
-              items={[{ name: "Plausible (selbst gehostet)", purpose: "Anonyme Zählung von Seitenaufrufen", provider: "Softwarenavi (EU)", duration: "keine Speicherung auf Ihrem Gerät", basis: "Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG" }]}
+              description="Cookielose, aggregierte Reichweitenmessung über Vercel Web Analytics; optional zusätzlich selbst gehostetes Plausible."
+              items={[{ name: "Vercel Web Analytics", purpose: "Aggregierte Zählung von Seitenaufrufen", provider: "Vercel Inc.", duration: "keine Tracking-Cookies auf Ihrem Gerät", basis: "Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG" }]}
             />
             <CategoryRow
               id="c-externe"

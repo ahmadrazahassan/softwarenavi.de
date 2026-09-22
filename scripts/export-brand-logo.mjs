@@ -15,12 +15,13 @@ const mark = h("svg", { width: 144, height: 144, viewBox: "0 0 64 64", fill: "no
   h("path", { d: "M50 12H27C18 12 12 16 12 23S18 34 27 34h10c9 0 15 4 15 11s-6 11-15 11H14", stroke: ink, strokeWidth: 8, strokeLinecap: "round", strokeLinejoin: "round" }),
   h("circle", { cx: 50, cy: 12, r: 5, fill: violet }),
 );
-const font = await readFile(join(root, "app", "fonts", "GeneralSans-Variable.woff2"));
+// ImageResponse supports WOFF but not WOFF2; Inter Tight closely matches the site's General Sans wordmark.
+const font = await readFile(join(root, "node_modules", "@fontsource", "inter-tight", "files", "inter-tight-latin-500-normal.woff"));
 const logo = h("div", {
   style: { display: "flex", alignItems: "center", width: "100%", height: "100%", padding: "24px", gap: "26px" },
 },
 mark,
-h("div", { style: { display: "flex", alignItems: "center", fontFamily: "General Sans", fontSize: 112, fontWeight: 500, letterSpacing: "-5px" } },
+h("div", { style: { display: "flex", alignItems: "center", fontFamily: "Inter Tight", fontSize: 112, fontWeight: 500, letterSpacing: "-5px" } },
   h("span", { style: { color: ink } }, "Software"),
   h("span", { style: { color: violet } }, "navi"),
 ));
@@ -28,7 +29,7 @@ h("div", { style: { display: "flex", alignItems: "center", fontFamily: "General 
 const response = new ImageResponse(logo, {
   width: 920,
   height: 192,
-  fonts: [{ name: "General Sans", data: font, weight: 500, style: "normal" }],
+  fonts: [{ name: "Inter Tight", data: font, weight: 500, style: "normal" }],
 });
 await writeFile(join(output, "softwarenavi-logo.png"), Buffer.from(await response.arrayBuffer()));
 

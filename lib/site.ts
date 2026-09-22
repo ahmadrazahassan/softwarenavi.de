@@ -15,7 +15,7 @@ export const CLAIM = "Unabhängig. Geprüft. Deutsch.";
 
 /** Version string of the consent texts shown in forms — stored with every consent (Art. 7 Abs. 1 DSGVO). */
 export const CONSENT_TEXT_VERSION = "2026-09-v1";
-export const COOKIE_POLICY_VERSION = "2026-09-v1";
+export const COOKIE_POLICY_VERSION = "2026-09-v2";
 
 export const absoluteUrl = (path = "/") => `${siteUrl}${path.startsWith("/") ? path : `/${path}`}`;
 

@@ -35,7 +35,7 @@ const DATENSCHUTZ = `
 <h3>2.2 Einwilligungsverwaltung (Cookie-Einstellungen)</h3>
 <p>Wir speichern Ihre Auswahl im Cookie <code>sl_consent</code> für sechs Monate. Zum Nachweis Ihrer Einwilligung (Art. 7 Abs. 1 DSGVO) protokollieren wir die Auswahl, die Version des Einwilligungstextes, einen zufälligen Identifikator, einen gekürzten, gesalzenen Hash Ihrer IP-Adresse und den Zeitpunkt. Rechtsgrundlage ist Art. 6 Abs. 1 lit. c DSGVO in Verbindung mit § 25 TDDDG. Die Protokolle werden nach drei Jahren gelöscht.</p>
 <h3>2.3 Reichweitenmessung</h3>
-<p>Nur wenn Sie in die Kategorie „Statistik“ eingewilligt haben, nutzen wir eine selbst gehostete, cookielose Reichweitenmessung mit IP-Anonymisierung. Rechtsgrundlage ist Art. 6 Abs. 1 lit. a DSGVO in Verbindung mit § 25 Abs. 1 TDDDG. Sie können Ihre Einwilligung jederzeit über „Cookie-Einstellungen“ im Fußbereich widerrufen.</p>
+<p>Nur wenn Sie in die Kategorie „Statistik“ eingewilligt haben, nutzen wir Vercel Web Analytics für eine cookielose, aggregierte Reichweitenmessung. Dabei können unter anderem aufgerufene Seiten, Zeitpunkt, Referrer sowie ungefähre Standort- und Geräteinformationen verarbeitet werden. URL-Parameter werden vor dem Versand entfernt. Falls konfiguriert, nutzen wir zusätzlich eine selbst gehostete Plausible-Instanz. Rechtsgrundlage ist Art. 6 Abs. 1 lit. a DSGVO in Verbindung mit § 25 Abs. 1 TDDDG. Sie können Ihre Einwilligung jederzeit über „Cookie-Einstellungen“ im Fußbereich widerrufen.</p>
 <h3>2.4 Bewertungen</h3>
 <p>Wenn Sie eine Bewertung abgeben, verarbeiten wir die von Ihnen angegebenen Daten (Anzeigename, optional Position, Unternehmen, Branche, Unternehmensgröße, Land, Nutzungsdauer sowie Ihre Bewertung). Zur Missbrauchsabwehr speichern wir einen gesalzenen Hash Ihrer IP-Adresse. Rechtsgrundlage ist Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Bewertungen werden vor der Veröffentlichung geprüft; nicht freigegebene Einreichungen löschen wir nach 90 Tagen. Veröffentlichte Bewertungen bleiben mit dem Anzeigenamen gespeichert, bis Sie deren Löschung verlangen.</p>
 <h3>2.5 Newsletter</h3>
@@ -50,7 +50,7 @@ const DATENSCHUTZ = `
 <li>Datenbank und Speicher: Supabase (Rechenzentrum Frankfurt am Main, EU)</li>
 <li>Hosting: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA (Ausführung der Serverfunktionen in der Region Frankfurt am Main; Übermittlung in die USA auf Grundlage des EU-US Data Privacy Framework und von Standardvertragsklauseln)</li>
 <li>E-Mail-Versand: Resend (Plus Five Five, Inc., 2261 Market Street #5039, San Francisco, CA 94114, USA; Versand über die EU-Region Irland; Übermittlung in die USA auf Grundlage von Standardvertragsklauseln)</li>
-<li>Reichweitenmessung (nur nach Einwilligung): selbst gehostet</li>
+<li>Reichweitenmessung (nur nach Einwilligung): Vercel Web Analytics; falls konfiguriert, zusätzlich selbst gehostetes Plausible</li>
 </ul>
 <h2>4. Übermittlung in Drittländer</h2>
 <p>Wir verarbeiten Ihre Daten grundsätzlich in der Europäischen Union. Sollte ein Dienstleister im Einzelfall Daten in einem Drittland verarbeiten, erfolgt dies nur auf Grundlage eines Angemessenheitsbeschlusses (z.&nbsp;B. EU-US Data Privacy Framework) oder geeigneter Garantien wie Standardvertragsklauseln.</p>
@@ -90,7 +90,7 @@ const COOKIES = `
 </ul>
 <h3>Statistik (nur mit Einwilligung)</h3>
 <ul>
-<li><strong>Selbst gehostete Reichweitenmessung</strong>: anonymisierte Messung von Seitenaufrufen ohne Cookies und ohne Weitergabe an Dritte. Anbieter: Softwarenavi (selbst gehostet, EU). Speicherdauer: keine Speicherung auf Ihrem Gerät. Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG.</li>
+<li><strong>Vercel Web Analytics</strong>: aggregierte Messung von Seitenaufrufen ohne Tracking-Cookies. Anbieter: Vercel Inc. URL-Parameter werden vor dem Versand entfernt. Falls konfiguriert, verwenden wir zusätzlich selbst gehostetes Plausible. Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG.</li>
 </ul>
 <h3>Externe Medien (nur mit Einwilligung)</h3>
 <ul>
@@ -100,7 +100,7 @@ const COOKIES = `
 <p>Wir setzen keine Cookies von Werbenetzwerken und kein seitenübergreifendes Tracking ein. Partnerlinks werden serverseitig über unsere eigene Weiterleitung erfasst; dabei setzen wir kein Cookie auf Ihrem Gerät.</p>
 <h2>Nachweis Ihrer Einwilligung</h2>
 <p>Zum Nachweis nach Art. 7 Abs. 1 DSGVO protokollieren wir Ihre Entscheidung serverseitig mit der Version dieser Richtlinie, einem zufälligen Identifikator und einem gesalzenen Hash Ihrer IP-Adresse, nicht mit Ihrer Identität. Einzelheiten finden Sie in der <a href="/datenschutz">Datenschutzerklärung</a>.</p>
-<p>Version: 2026-09-v1</p>`;
+<p>Version: 2026-09-v2</p>`;
 
 const AGB = `
 <h2>§ 1 Geltungsbereich</h2>
