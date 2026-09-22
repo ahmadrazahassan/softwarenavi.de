@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 import { CheckCircle2, Loader2 } from "lucide-react";
-import { unsubscribeNewsletter } from "@/app/(public)/newsletter/actions";
+import { unsubscribeNewsletter } from "@/app/(public)/softwarebrief/actions";
 import { initialFormState } from "@/lib/forms";
 import { Field, Input } from "@/components/ui/form-controls";
 

@@ -6,10 +6,10 @@ import { PenLine } from "lucide-react";
 import { getRatingDistribution, getReviewHighlights, getReviewsForSoftware, getSoftwareBySlug } from "@/lib/supabase/queries";
 import { Breadcrumb, EmptyState, Pagination } from "@/components/public/Layout";
 import { ReviewCard } from "@/components/public/ReviewCard";
-import { RatingsOverview, ReviewHighlights } from "@/components/profile/Sections";
+import { EditorialReviewBlock, NoUserReviewsYet, RatingsOverview, ReviewHighlights } from "@/components/profile/Sections";
 import { ReviewFilters } from "@/components/profile/ReviewFilters";
 import { SoftwareLogo } from "@/components/public/SoftwareLogo";
-import { AffiliateCTAButton, AffiliateDisclosureNote } from "@/components/public/Affiliate";
+import { AffiliateCTAButton, AffiliateDisclosureNote, AffiliatePageNotice } from "@/components/public/Affiliate";
 import type { ReviewFilters as RF } from "@/lib/types";
 import { flatParams, type SP } from "@/lib/filters";
 import { formatCount } from "@/lib/utils/format";
@@ -22,8 +22,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const s = await getSoftwareBySlug(slug);
   if (!s) return {};
   return {
-    title: `${s.name} Erfahrungen: ${formatCount(s.review_count)} Bewertungen`,
-    description: `Alle ${seedReviewsEnabled() ? "" : "geprüften "}Bewertungen zu ${s.name}, filterbar nach Branche, Unternehmensgröße, Rechtsform und Land.`,
+    title: s.review_count > 0 ? `${s.name} Erfahrungen: ${formatCount(s.review_count)} Bewertungen` : `${s.name}: Redaktionelle Bewertung`,
+    description: s.review_count > 0
+      ? `Alle ${seedReviewsEnabled() ? "" : "geprüften "}Bewertungen zu ${s.name}, filterbar nach Branche, Unternehmensgröße, Rechtsform und Land.`
+      : `Unsere redaktionelle Bewertung zu ${s.name}. Nutzerbewertungen erscheinen nach Prüfung und Veröffentlichung.`,
     alternates: { canonical: `/software/${slug}/bewertungen` },
   };
 }
@@ -56,12 +58,15 @@ export default async function ReviewsPage({ params, searchParams }: { params: Pr
   return (
     <div className="container-site pt-8">
       <Breadcrumb items={[{ label: "Software", href: "/software" }, { label: s.name, href: `/software/${slug}` }, { label: "Bewertungen" }]} />
+      <AffiliatePageNotice />
       <header className="mt-6 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div className="flex items-center gap-4">
           <SoftwareLogo software={s} size={64} />
           <div>
             <h1 className="font-heading text-[1.7rem] font-medium tracking-tight sm:text-3xl md:text-4xl">{s.name}: Erfahrungen und Bewertungen</h1>
-            <p className="mt-1 text-muted-foreground">{formatCount(s.review_count)} {seedReviewsEnabled() ? "" : "geprüfte "}Bewertungen aus Unternehmen in Deutschland, Österreich und der Schweiz</p>
+            <p className="mt-1 text-muted-foreground">{s.review_count > 0
+              ? `${formatCount(s.review_count)} ${seedReviewsEnabled() ? "" : "geprüfte "}Bewertungen aus Unternehmen in Deutschland, Österreich und der Schweiz`
+              : "Redaktionelle Bewertung · noch keine veröffentlichten Nutzerbewertungen"}</p>
           </div>
         </div>
         <div className="flex flex-col gap-2 md:w-72">
@@ -76,6 +81,12 @@ export default async function ReviewsPage({ params, searchParams }: { params: Pr
         </div>
       </header>
 
+      {s.review_count === 0 ? (
+        <div className="mt-8 space-y-5">
+          {s.editorial && <EditorialReviewBlock software={s} />}
+          <NoUserReviewsYet software={s} />
+        </div>
+      ) : <>
       <div className="mt-8">
         <RatingsOverview software={s} distribution={dist} />
       </div>
@@ -102,6 +113,7 @@ export default async function ReviewsPage({ params, searchParams }: { params: Pr
         )}
       </div>
       <Pagination page={page} total={list.total} perPage={perPage} basePath={`/software/${slug}/bewertungen`} params={flatParams(sp)} />
+      </>}
     </div>
   );
 }

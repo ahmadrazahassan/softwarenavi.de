@@ -62,11 +62,11 @@ export async function subscribeNewsletter(_prev: FormState, fd: FormData): Promi
     : await db.from("newsletter_subscribers").insert(row);
   if (error) return { ok: false, message: "Ihre Anmeldung konnte nicht gespeichert werden. Bitte versuchen Sie es erneut.", values: { email } };
 
-  const link = absoluteUrl(`/newsletter/bestaetigen?token=${token}`);
+  const link = absoluteUrl(`/softwarebrief/bestaetigen?token=${token}`);
   const sent = await sendMail({
     to: email,
-    subject: "Bitte bestätigen Sie Ihre Anmeldung zum Softwarenavi-Newsletter",
-    text: `Guten Tag,\n\nbitte bestätigen Sie Ihre Anmeldung zum Newsletter von Softwarenavi über diesen Link:\n${link}\n\nDer Link ist 48 Stunden gültig. Wenn Sie sich nicht angemeldet haben, ignorieren Sie diese E-Mail einfach. Ihre Adresse wird dann automatisch gelöscht.\n\nSoftwarenavi`,
+    subject: "Bitte bestätigen Sie Ihre Anmeldung zum Softwarebrief von Softwarenavi",
+    text: `Guten Tag,\n\nbitte bestätigen Sie Ihre Anmeldung zum Softwarebrief von Softwarenavi über diesen Link:\n${link}\n\nDer Link ist 48 Stunden gültig. Wenn Sie sich nicht angemeldet haben, ignorieren Sie diese E-Mail einfach. Ihre Adresse wird dann automatisch gelöscht.\n\nSoftwarenavi`,
   });
   if (!sent) {
     await db.from("newsletter_subscribers").delete().eq("confirm_token", token).eq("status", "pending");

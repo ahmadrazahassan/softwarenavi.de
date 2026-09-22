@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getCategories, getSoftwareList } from "@/lib/supabase/queries";
 import { activeFilterCount, FILTER_PARAMS, flatParams, parseSoftwareFilters, type SP } from "@/lib/filters";
 import { Breadcrumb } from "@/components/public/Layout";
+import { AffiliatePageNotice } from "@/components/public/Affiliate";
 import { DirectoryResults } from "@/components/public/DirectoryResults";
 import { formatCount } from "@/lib/utils/format";
 import { hy } from "@/lib/utils/hyphenate";
@@ -43,6 +44,7 @@ export default async function SoftwarePage({ searchParams }: { searchParams: Pro
   return (
     <div className="container-site pt-8">
       <Breadcrumb items={[{ label: "Software" }]} />
+      <AffiliatePageNotice />
 
       <header className="mt-10 grid gap-10 md:mt-14 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-16">
         <div className="max-w-3xl">

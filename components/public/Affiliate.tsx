@@ -60,3 +60,19 @@ export function AffiliateDisclosureNote({ compact = false, className }: { compac
     </p>
   );
 }
+
+/**
+ * Seitenweiter Werbehinweis (§ 5a Abs. 4 UWG, § 6 Abs. 1 Nr. 1 DDG) — steht direkt unter der Breadcrumb,
+ * also vor dem ersten Partnerlink, auf allen Test-, Vergleichs- und Listenseiten.
+ */
+export function AffiliatePageNotice({ className }: { className?: string }) {
+  return (
+    <p role="note" className={cn("mt-3 rounded-md border border-border bg-muted/40 px-3 py-2 text-[12.5px] leading-snug text-muted-foreground", className)}>
+      <strong className="font-semibold text-ink">Werbehinweis:</strong> Diese Seite enthält Partnerlinks, gekennzeichnet als „Anzeige“. Schließen Sie darüber
+      einen Vertrag ab, erhalten wir eine Provision. Ihr Preis bleibt gleich, und auf unsere Bewertungen und Rangfolgen hat das keinen Einfluss.{" "}
+      <Link href="/affiliate-hinweis" className="underline decoration-brand underline-offset-2 hover:text-ink">
+        So finanzieren wir uns
+      </Link>
+    </p>
+  );
+}

@@ -10,7 +10,7 @@ import { INTEGRATION_ICONS } from "@/lib/data/logos";
 import { RATING_DIMENSIONS, USER_BUCKETS } from "@/lib/i18n/options";
 import { complianceRows, ComplianceFootnote } from "@/components/public/ComplianceBadges";
 import { StarRating } from "@/components/public/Rating";
-import { AffiliateCTAButton } from "@/components/public/Affiliate";
+import { AffiliateCTAButton, AffiliateDisclosureNote } from "@/components/public/Affiliate";
 import { ratingWord } from "@/lib/rating";
 
 export function ProfileSection({ id, title, children, className }: { id: string; title: string; children: React.ReactNode; className?: string }) {
@@ -205,6 +205,7 @@ export function PricingCards({ software }: { software: Software }) {
         {NET_PRICE_NOTE} Listenpreise laut Anbieter, Stand {software.compliance_checked_at ? formatMonthYear(software.compliance_checked_at) : "unbekannt"}. Aktionspreise und
         Jahresrabatte können abweichen.
       </p>
+      <AffiliateDisclosureNote compact className="mt-2" />
     </div>
   );
 }

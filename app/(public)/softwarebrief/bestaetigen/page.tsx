@@ -32,7 +32,7 @@ export default async function ConfirmPage({ searchParams }: { searchParams: Prom
           <>
             <CheckCircle2 className="mx-auto size-12 text-brand-dark" aria-hidden="true" />
             <h1 className="mt-4 font-heading text-2xl font-medium">Anmeldung bestätigt</h1>
-            <p className="mt-2 text-muted-foreground">Vielen Dank. Sie erhalten den Softwarenavi-Newsletter ab der nächsten Ausgabe. Abmelden können Sie sich jederzeit über den Link in jeder E-Mail.</p>
+            <p className="mt-2 text-muted-foreground">Vielen Dank. Sie erhalten den Softwarebrief ab der nächsten Ausgabe. Abmelden können Sie sich jederzeit über den Link in jeder E-Mail.</p>
           </>
         ) : (
           <>
@@ -41,7 +41,7 @@ export default async function ConfirmPage({ searchParams }: { searchParams: Prom
             <p className="mt-2 text-muted-foreground">
               Bestätigungslinks sind 48 Stunden gültig. Unbestätigte Anmeldungen löschen wir danach automatisch. Bitte melden Sie sich erneut an.
             </p>
-            <Link href="/newsletter" className="mt-6 inline-flex h-11 items-center rounded-[7px] btn-glossy px-6 text-sm font-medium">
+            <Link href="/softwarebrief" className="mt-6 inline-flex h-11 items-center rounded-[7px] btn-glossy px-6 text-sm font-medium">
               Erneut anmelden
             </Link>
           </>

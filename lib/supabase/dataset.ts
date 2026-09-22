@@ -101,8 +101,13 @@ async function loadFromSupabase(): Promise<Dataset> {
     db.from("pages").select("*").eq("status", "published"),
     db.from("site_settings").select("key, value"),
   ]);
-  const failed = [sw, cats, revs, cmps, alts, arts, pages, settings].find((r) => r.error);
-  if (failed?.error) throw failed.error;
+  // Product and review reads are essential. An unrelated content-table failure must not
+  // replace published reviews with the review-free offline dataset.
+  if (sw.error) throw sw.error;
+  if (revs.error) throw revs.error;
+  for (const [name, result] of Object.entries({ cats, cmps, alts, arts, pages, settings })) {
+    if (result.error) console.error(`[dataset] ${name} konnte nicht geladen werden:`, result.error);
+  }
 
   const alternatives: Record<string, string[]> = {};
   for (const a of (alts.data ?? []) as { software_id: string; alternative_id: string }[]) {
@@ -118,7 +123,9 @@ async function loadFromSupabase(): Promise<Dataset> {
     alternatives,
     articles: ((arts.data ?? []) as Article[]).map((a) => ({ ...a, updated_date: a.updated_date ?? a.published_date })),
     pages: (pages.data ?? []) as Page[],
-    settings: Object.fromEntries(((settings.data ?? []) as { key: string; value: string | null }[]).map((x) => [x.key, x.value ?? ""])),
+    settings: settings.error
+      ? local.SITE_SETTINGS
+      : Object.fromEntries(((settings.data ?? []) as { key: string; value: string | null }[]).map((x) => [x.key, x.value ?? ""])),
   };
 }
 
@@ -127,7 +134,7 @@ const loadDataset = async (): Promise<Dataset> => {
   try {
     return await loadFromSupabase();
   } catch (err) {
-    if (process.env.NODE_ENV !== "production") console.error("[dataset] Supabase nicht erreichbar, nutze lokale Daten:", err);
+    console.error("[dataset] Supabase nicht erreichbar, nutze lokale Daten:", err);
     return localDataset();
   }
 };

@@ -5,6 +5,7 @@ import { CheckCircle2 } from "lucide-react";
 import { getCategories, getCategoryBySlug, getPublishedComparisons, getSoftwareList, getTopRatedSoftware } from "@/lib/supabase/queries";
 import { activeFilterCount, flatParams, parseSoftwareFilters, type SP } from "@/lib/filters";
 import { Breadcrumb, Eyebrow, SectionHeader } from "@/components/public/Layout";
+import { AffiliatePageNotice } from "@/components/public/Affiliate";
 import { DirectoryResults } from "@/components/public/DirectoryResults";
 import { ComparisonCard, CategoryIcon } from "@/components/public/Cards";
 import { FaqAccordion } from "@/components/profile/FaqAccordion";
@@ -63,6 +64,7 @@ export default async function CategoryPage({ params, searchParams }: { params: P
         }}
       />
       <Breadcrumb items={[{ label: "Kategorien", href: "/kategorien" }, { label: category.name }]} />
+      <AffiliatePageNotice />
 
       <header className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-[1.3fr_1fr] lg:items-end [&>*]:min-w-0">
         <div>

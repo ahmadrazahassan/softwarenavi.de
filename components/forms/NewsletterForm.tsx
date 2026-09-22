@@ -3,7 +3,7 @@
 import { useActionState, useEffect, useId } from "react";
 import { toast } from "sonner";
 import { CheckCircle2, Loader2, Send } from "lucide-react";
-import { subscribeNewsletter } from "@/app/(public)/newsletter/actions";
+import { subscribeNewsletter } from "@/app/(public)/softwarebrief/actions";
 import { initialFormState } from "@/lib/forms";
 import { cn } from "@/lib/utils";
 import { ConsentCheckbox, Honeypot } from "./ConsentCheckbox";
@@ -73,7 +73,7 @@ export function NewsletterForm({ variant = "full", source = "unbekannt" }: { var
       )}
       <div className={dark ? "[&_label]:text-white/70 [&_a]:text-white" : undefined}>
         <ConsentCheckbox id={`${id}-consent`} error={state.errors?.consent}>
-          Ich möchte den Softwarenavi-Newsletter (höchstens zweimal im Monat, Softwaretests, Vergleiche und Fristen) per E-Mail erhalten. Die Einwilligung
+          Ich möchte den Softwarebrief von Softwarenavi (höchstens zweimal im Monat, Softwaretests, Vergleiche und Fristen) per E-Mail erhalten. Die Einwilligung
           kann ich jederzeit über den Abmeldelink widerrufen. Hinweise zur Verarbeitung in der{" "}
           <Link href="/datenschutz" className="font-medium underline underline-offset-2">
             Datenschutzerklärung

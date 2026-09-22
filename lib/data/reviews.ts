@@ -355,8 +355,9 @@ function gauss(rnd: () => number) {
 
 const clamp = (n: number) => Math.max(1, Math.min(5, Math.round(n)));
 
-const START = Date.UTC(2024, 0, 15);
-const END = Date.UTC(2026, 8, 12);
+// Random dates from October 1, 2025 to September 22, 2026 (realistic timeframe)
+const START = Date.UTC(2025, 9, 1);   // October 1, 2025
+const END = Date.UTC(2026, 8, 22);   // September 22, 2026
 
 export function generateReviews(def: ProductDef): Review[] {
   const rnd = mulberry32(hash(def.slug));

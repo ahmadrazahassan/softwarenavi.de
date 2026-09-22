@@ -10,7 +10,7 @@ const STATIC = [
   "/kategorien",
   "/vergleich",
   "/ratgeber",
-  "/newsletter",
+  "/softwarebrief",
   "/kontakt",
   "/ueber-uns",
   "/impressum",

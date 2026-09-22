@@ -13,7 +13,7 @@ import { featureCatalogueFor } from "@/lib/data/categories";
 import { RATING_DIMENSIONS } from "@/lib/i18n/options";
 import { Breadcrumb, Eyebrow } from "@/components/public/Layout";
 import { SoftwareLogo } from "@/components/public/SoftwareLogo";
-import { AffiliateCTAButton, AffiliateDisclosureNote } from "@/components/public/Affiliate";
+import { AffiliateCTAButton, AffiliateDisclosureNote, AffiliatePageNotice } from "@/components/public/Affiliate";
 import { CardActions, ComparisonCard, OfferBadges, PartnerLinkNote, RatingMeter } from "@/components/public/Cards";
 import { complianceRows, ComplianceFootnote } from "@/components/public/ComplianceBadges";
 import { ComparisonRadarChart } from "@/components/compare/ComparisonRadarChart";
@@ -176,6 +176,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ paa
         }}
       />
       <Breadcrumb items={[{ label: "Vergleich", href: "/vergleich" }, { label: `${a.name} vs. ${b.name}` }]} />
+      <AffiliatePageNotice />
 
       {/* ── Hero duel ── */}
       <header className="mt-8">

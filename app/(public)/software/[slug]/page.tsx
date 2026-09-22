@@ -20,7 +20,7 @@ import { Breadcrumb } from "@/components/public/Layout";
 import { SoftwareLogo } from "@/components/public/SoftwareLogo";
 import { StarRating } from "@/components/public/Rating";
 import { ComplianceBadges } from "@/components/public/ComplianceBadges";
-import { AffiliateCTAButton, AffiliateDisclosureNote } from "@/components/public/Affiliate";
+import { AffiliateCTAButton, AffiliateDisclosureNote, AffiliatePageNotice } from "@/components/public/Affiliate";
 import { AlternativeCard, OfferBadges } from "@/components/public/Cards";
 import { ReviewCard } from "@/components/public/ReviewCard";
 import { ArticleCard } from "@/components/public/ArticleCard";
@@ -154,6 +154,7 @@ export default async function SoftwareProfilePage({ params }: { params: Promise<
           { label: s.name },
         ]}
       />
+      <AffiliatePageNotice />
 
       {/* ───────────── ProfileShell ───────────── */}
       <header className="mt-8 grid gap-10 border-b border-border pb-10 md:mt-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-16 lg:pb-12">

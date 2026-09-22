@@ -20,6 +20,7 @@ import { SoftwareSpotlight } from "@/components/home/SoftwareSpotlight";
 import { LandscapeHero } from "@/components/home/LandscapeHero";
 import { ComparisonShowcase } from "@/components/home/ComparisonShowcase";
 import { ReviewMarquee } from "@/components/home/ReviewMarquee";
+import { EditorialReviews } from "@/components/home/EditorialReviews";
 import { RatingsPanel } from "@/components/home/FinanceVisuals";
 import { VendorMarquee } from "@/components/home/VendorMarquee";
 import { CategoryRail } from "@/components/home/CategoryRail";
@@ -89,6 +90,7 @@ export default async function HomePage() {
   // Reviews marquee: newest review per product, so every tile shows a different vendor.
   const seen = new Set<string>();
   const reviews = latestReviews.filter((r) => !seen.has(r.software.slug) && seen.add(r.software.slug)).slice(0, 24);
+  const editorialReviews = overall.filter((s) => s.editorial).slice(0, 3);
 
   // Marquee: vendors with a real logo first, then the best-known German vendors by review count.
   const withLogo = bySoftware.items.filter((s) => s.logo_url);
@@ -304,15 +306,17 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* ───────────── Stimmen (only once real, published user reviews exist) ───────────── */}
-      {reviews.length > 0 && (
+      {/* ───────────── Published user reviews, or clearly labelled editorial assessments ───────────── */}
+      {(reviews.length > 0 || editorialReviews.length > 0) && (
       <section aria-labelledby="voices-title" className="mt-28">
         <div className="container-site">
           <SectionHeader
             id="voices-title"
-            eyebrow="Aus der Praxis"
-            title="Was Anwender über ihre Software schreiben"
-            sub={`Auszüge aus ${formatCount(stats.reviews)} ${seedReviewsEnabled() ? "" : "geprüften "}Bewertungen. Geschrieben von Steuerkanzleien, Handwerksbetrieben, Agenturen und Mittelständlern.`}
+            eyebrow={reviews.length > 0 ? "Aus der Praxis" : "Redaktionelle Bewertungen"}
+            title={reviews.length > 0 ? "Was Anwender über ihre Software schreiben" : "Unsere Bewertungen im Überblick"}
+            sub={reviews.length > 0
+              ? `Auszüge aus ${formatCount(stats.reviews)} ${seedReviewsEnabled() ? "" : "geprüften "}Bewertungen. Geschrieben von Steuerkanzleien, Handwerksbetrieben, Agenturen und Mittelständlern.`
+              : "Unabhängige Redaktionsnoten auf Basis von Produktdokumentation und geprüften Preislisten. Keine Nutzerbewertungen."}
             action={
               <GlossyButton href="/software" variant="neutral" size="sm">
                 Alle Programme <ArrowUpRight aria-hidden="true" />
@@ -321,7 +325,7 @@ export default async function HomePage() {
           />
         </div>
         <div className="mt-10">
-          <ReviewMarquee reviews={reviews} />
+          {reviews.length > 0 ? <ReviewMarquee reviews={reviews} /> : <EditorialReviews software={editorialReviews} />}
         </div>
       </section>
       )}

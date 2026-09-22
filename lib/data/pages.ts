@@ -13,8 +13,6 @@ const IMPRESSUM = `
 <p>Telefon: +49 155 10369734<br/>E-Mail: <a href="mailto:hallo@softwarenavi.de">hallo@softwarenavi.de</a><br/>Kontaktformular: <a href="/kontakt">softwarenavi.de/kontakt</a>. Wir antworten in der Regel innerhalb von zwei Werktagen.</p>
 <h3>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h3>
 <p>Nadeem Abbas<br/>Am Forsthaus Gravenbruch 42<br/>63263 Neu-Isenburg</p>
-<h3>EU-Streitschlichtung</h3>
-<p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/" rel="noopener" target="_blank">https://ec.europa.eu/consumers/odr/</a>. Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
 <h3>Verbraucherstreitbeilegung / Universalschlichtungsstelle</h3>
 <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
 <h2>Haftung für Inhalte</h2>

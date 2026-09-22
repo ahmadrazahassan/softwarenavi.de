@@ -13,7 +13,7 @@ const EXPLORE = [
   { href: "/kategorien", label: "Kategorien" },
   { href: "/vergleich", label: "Vergleich" },
   { href: "/ratgeber", label: "Ratgeber" },
-  { href: "/newsletter", label: "Newsletter" },
+  { href: "/softwarebrief", label: "Softwarebrief" },
 ];
 
 const COMPANY = [

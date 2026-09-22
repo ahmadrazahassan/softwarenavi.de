@@ -7,7 +7,7 @@ import { SoftwareLogo } from "@/components/public/SoftwareLogo";
 import { StarRating } from "@/components/public/Rating";
 import { ComplianceBadges } from "@/components/public/ComplianceBadges";
 import { PriceLine } from "@/components/public/Cards";
-import { AffiliateCTAButton, AffiliateDisclosureNote } from "@/components/public/Affiliate";
+import { AffiliateCTAButton, AffiliateDisclosureNote, AffiliatePageNotice } from "@/components/public/Affiliate";
 import { CURRENT_YEAR } from "@/lib/site";
 import { formatCount, formatRating, NET_PRICE_NOTE } from "@/lib/utils/format";
 import { ratingCaption } from "@/lib/rating";
@@ -34,6 +34,7 @@ export default async function AlternativesPage({ params }: { params: Promise<{ s
   return (
     <div className="container-site pt-8">
       <Breadcrumb items={[{ label: "Software", href: "/software" }, { label: s.name, href: `/software/${slug}` }, { label: "Alternativen" }]} />
+      <AffiliatePageNotice />
       <header className="mt-6 max-w-3xl">
         <h1 className="font-heading text-[2rem] font-medium tracking-tight sm:text-4xl md:text-5xl">
           Die besten Alternativen zu {s.name} ({CURRENT_YEAR})

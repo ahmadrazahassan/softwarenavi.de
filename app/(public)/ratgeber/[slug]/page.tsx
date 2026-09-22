@@ -8,7 +8,7 @@ import { ArticleCard } from "@/components/public/ArticleCard";
 import { JsonLd } from "@/components/public/JsonLd";
 import { SoftwareLogo } from "@/components/public/SoftwareLogo";
 import { StarRating } from "@/components/public/Rating";
-import { AffiliateCTAButton, AffiliateDisclosureNote } from "@/components/public/Affiliate";
+import { AffiliateCTAButton, AffiliateDisclosureNote, AffiliatePageNotice } from "@/components/public/Affiliate";
 import { NewsletterForm } from "@/components/forms/NewsletterForm";
 import { AUTHOR_BIO, AUTHOR_NAME, AUTHOR_TITLE, absoluteUrl } from "@/lib/site";
 import { formatDateLong, formatRating } from "@/lib/utils/format";
@@ -74,6 +74,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         }}
       />
       <Breadcrumb items={[{ label: "Ratgeber", href: "/ratgeber" }, { label: a.title }]} />
+      <AffiliatePageNotice />
 
       <article className="mt-8">
         <header className="mx-auto max-w-3xl">
