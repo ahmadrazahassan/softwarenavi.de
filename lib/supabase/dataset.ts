@@ -132,8 +132,12 @@ const loadDataset = async (): Promise<Dataset> => {
   }
 };
 
-/** SEED_REVIEWS=true swaps in the generated seed reviews (never on Vercel Production, see lib/data/seedReviews.ts). */
+/** SEED_REVIEWS=true prioritizes generated seed reviews over Supabase data. */
 export const getDataset = cache(async (): Promise<Dataset> => {
+  if (seedReviewsEnabled()) {
+    const d = localDataset();
+    return applySeedReviews(d, withDisplayScores);
+  }
   const d = await loadDataset();
-  return seedReviewsEnabled() ? applySeedReviews(d, withDisplayScores) : d;
+  return d;
 });
