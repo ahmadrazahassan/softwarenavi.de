@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <title>Softwarenavi</title>
+  <path d="M50 12H27C18 12 12 16 12 23S18 34 27 34h10c9 0 15 4 15 11s-6 11-15 11H14" stroke="#15131E" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="50" cy="12" r="5" fill="#5B4FE0"/>
+</svg>
